@@ -1,23 +1,31 @@
+# Description
+
+The objective of this project is to run the [llm.c](https://github.com/karpathy/llm.c) on a docker.
+The main reason for this is because of many erros related to cuda compatibility. I got "cudnn PTX not supppoted",
+both on cuda-12.5 and cuda-12.4 (see [#7](https://gitlab.archlinux.org/archlinux/packaging/packages/cuda/-/issues/7) and [#237](https://github.com/karpathy/llm.c/issues/237) )
+
 # Host Configuration (Archlinux)
 
-On Archlinux, you need the @nvidia-container-toolkit@ package to run. You also need
+On Archlinux, you need the `nvidia-container-toolkit` package to run. You also need
 to restart the docker service after that installation.
 
-You can test you installation with:
+You can test your installation with:
 ```
 docker run --rm --gpus all nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 nvidia-smi
 ```
 
-You can run the image with:
+To build the dockerimage, just run:
 ```
 docker build .
 ```
+
+This script was tested on a notebook with NVIDIA GeForce RTX 3060 Laptop GPU.
 
 # Train GPT2
 
 To execute the images, you need to run the container with (you need a gpu):
 ```
-docker run --gpus all -it 6da25d955c75 bash
+docker run --gpus all -it <container id> bash
 ```
 
 You should get similar results to the following:
